@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>For My Favorite Person ❤️</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: #fffafc;
+      overflow-x: hidden;
+      color: #555;
+      position: relative;
+    }
+
+    /* =========================
+       RED HEART BACKGROUND
+       ========================= */
+
+    .hearts-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -50px;
+      color: #ff4d6d;
+      opacity: 0.45;
+      animation: floatHeart linear forwards;
+      filter: drop-shadow(0 3px 6px rgba(255, 60, 90, 0.15));
+    }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.45;
+      }
+
+      50% {
+        transform: translateY(-50vh) rotate(15deg) scale(1);
+      }
+
+      90% {
+        opacity: 0.3;
+      }
+
+      100% {
+        transform: translateY(-115vh) rotate(-15deg) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* Keep website content above hearts */
+    body > section,
+    body > footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ffd6e7, #fff0f7);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      color: #ff5f9e;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      line-height: 1.8;
+    }
+
+    /* Button */
+    .btn {
+      margin-top: 30px;
+      padding: 15px 35px;
+      border: none;
+      border-radius: 50px;
+      background: #ff78a5;
+      color: white;
+      font-size: 18px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 10px 25px rgba(255, 120, 165, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(255, 120, 165, 0.4);
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 10%;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 2.5rem;
+      color: #ff5f9e;
+      margin-bottom: 50px;
+    }
+
+    /* Photo Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 35px;
+    }
+
+    .photo-card {
+      background: white;
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      transition: 0.3s;
+    }
+
+    .photo-card:hover {
+      transform: scale(1.05) rotate(0deg);
+    }
+
+    .photo-card:nth-child(1) {
+      transform: rotate(-3deg);
+    }
+
+    .photo-card:nth-child(2) {
+      transform: rotate(2deg);
+    }
+
+    .photo-card:nth-child(3) {
+      transform: rotate(-2deg);
+    }
+
+    .photo-card:nth-child(4) {
+      transform: rotate(3deg);
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 15px;
+      display: block;
+    }
+
+    .caption {
+      text-align: center;
+      margin-top: 15px;
+      font-weight: 700;
+      color: #ff6c9a;
+      padding-bottom: 5px;
+    }
+
+    /* Reasons */
+    .reasons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+    }
+
+    .reason {
+      background: white;
+      padding: 25px;
+      border-radius: 25px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      text-align: center;
+    }
+
+    .reason h3 {
+      color: #ff6799;
+      margin-bottom: 10px;
+    }
+
+    .reason p {
+      line-height: 1.7;
+    }
+
+    /* Love Letter */
+    .letter {
+      background: white;
+      max-width: 800px;
+      margin: auto;
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+      line-height: 2;
+      text-align: center;
+    }
+
+    .signature {
+      margin-top: 25px;
+      color: #ff5f9e;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+
+    /* Footer */
+    footer {
+      background: #ffdce9;
+      color: #ff5f9e;
+      text-align: center;
+      padding: 30px;
+      font-weight: 700;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .title {
+        font-size: 2rem;
+      }
+
+      section {
+        padding: 60px 6%;
+      }
+
+      .photo-card img {
+        height: 280px;
+      }
+
+      .letter {
+        padding: 25px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- RED HEART BACKGROUND -->
+  <div class="hearts-background" id="heartsBackground"></div>
+
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <h1>To The Love of My Life- Mani 💖</h1>
+
+    <p>
+      A tiny corner of the internet made just for you.
+      Thank you for all the smiles, memories, laughter and love.
+    </p>
+
+    <button
+      class="btn"
+      onclick="document.getElementById('memories').scrollIntoView({ behavior: 'smooth' });"
+    >
+      See Our Memories 📸
+    </button>
+
+  </section>
+
+
+  <!-- MEMORIES -->
+  <section id="memories">
+
+    <h2 class="title">Our Favorite Memories ✨</h2>
+
+    <div class="gallery">
+
+      <div class="photo-card">
+        <img src="photo1.jpg" alt="Our first trip">
+        <div class="caption">My Happiest Day ❤️</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="photo2.jpg" alt="Our happy memory">
+        <div class="caption">Our First Trip 🌸</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="photo3.jpg" alt="Your smile">
+        <div class="caption">Your Smile = My Favorite ✨</div>
+      </div>
+
+      <div class="photo-card">
+        <img src="photo4.jpg" alt="Our memories">
+        <div class="caption">Forever Making Memories 💕</div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- REASONS -->
+  <section>
+
+    <h2 class="title">Why You're Special 🥰</h2>
+
+    <div class="reasons">
+
+      <div class="reason">
+        <h3>💖 Your Love</h3>
+        <p>
+          No one ever loved me like u did Mani,
+          I can never be more grateful u have you.
+        </p>
+      </div>
+
+      <div class="reason">
+        <h3>😂 Your Humor</h3>
+        <p>
+          You always know how to make me smile. Tu pehla hai jo mere haseen ke peeche ka dukh dekh skta hai and I am more than grateful for having u bachcha. 
+        </p>
+      </div>
+
+      <div class="reason">
+        <h3>🌷 Caring Nature</h3>
+        <p>
+          You are always there when I need you and YES,
+          that hug was the best thing that ever happened to me.
+          It was the medicine I always needed to heal.
+        </p>
+      </div>
+
+      <div class="reason">
+        <h3>✨ Simply You</h3>
+        <p>
+          Because you are perfectly you & I LOVE YOU.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- LOVE LETTER -->
+  <section>
+
+    <h2 class="title">A Little Letter For You 💌</h2>
+
+    <div class="letter">
+
+      <p>
+        Dear Mani,
+        <br><br>
+
+        Thank you for every smile, every memory, every laugh,
+        and every beautiful moment.
+
+        You make my ordinary days feel special and special days
+        unforgettable. In 2 saal 10 mahino mei mai ek cheez toh
+        samajh gyi hun, I am nothing without u. I never loved
+        someone as much as I love you...neither I ever will.
+
+        You are the BEST thing that happened to me in these years.
+        I never want to lose you bachcha.
+
+        I'm grateful for every second we spend together,
+        and I'm excited for all the memories we haven't made yet.
+I hope you get all the happiness in the world and become the MOST successfull person in world. 
+
+Chaahe koi rhei na rhei, mai humesha tere saath rhungi Mani. I PROMISE.
+
+        <br><br>
+
+        You truly mean the world to me. 
+I LOVE YOU MANI❤️
+      </p>
+
+      <div class="signature">
+        Forever Yours 💖
+        <br>
+        Namrata
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    Made With Love ❤️
+  </footer>
+
+
+  <!-- FLOATING HEARTS SCRIPT -->
+  <script>
+
+    const heartsBackground =
+      document.getElementById("heartsBackground");
+
+    const heartSymbols = ["♥", "♥", "♥", "❤", "♡"];
+
+    function createHeart() {
+
+      const heart = document.createElement("div");
+
+      heart.classList.add("heart");
+
+      heart.innerHTML =
+        heartSymbols[
+          Math.floor(Math.random() * heartSymbols.length)
+        ];
+
+      heart.style.left =
+        Math.random() * 100 + "vw";
+
+      heart.style.fontSize =
+        (15 + Math.random() * 25) + "px";
+
+      heart.style.animationDuration =
+        (6 + Math.random() * 5) + "s";
+
+      heart.style.animationDelay =
+        Math.random() * 2 + "s";
+
+      heartsBackground.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 12000);
+    }
+
+    // Create hearts continuously
+    setInterval(createHeart, 450);
+
+  </script>
+
+</body>
+</html>
